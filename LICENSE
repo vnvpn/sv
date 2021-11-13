@@ -1,0 +1,101 @@
+GIẤY PHÉP CÔNG CỘNG CHUNG GNU
+                       Phiên bản 3, ngày 29 tháng 6 năm 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Mọi người đều được phép sao chép và phân phối các bản sao nguyên văn
+ của tài liệu cấp phép này, nhưng không được phép thay đổi nó.
+
+                            Mở đầu
+
+  Giấy phép Công cộng GNU là một giấy phép copyleft miễn phí dành cho
+phần mềm và các loại công trình khác.
+
+  Giấy phép cho hầu hết phần mềm và các công việc thực tế khác được thiết kế
+tước quyền tự do chia sẻ và thay đổi tác phẩm của bạn. Ngược lại,
+Giấy phép Công cộng GNU nhằm đảm bảo quyền tự do của bạn
+chia sẻ và thay đổi tất cả các phiên bản của chương trình - để đảm bảo chương trình đó vẫn miễn phí
+phần mềm cho tất cả người dùng của nó. Chúng tôi, Tổ chức Phần mềm Miễn phí, sử dụng
+Giấy phép Công cộng GNU cho hầu hết các phần mềm của chúng tôi; nó cũng áp dụng cho
+bất kỳ tác phẩm nào khác được phát hành theo cách này bởi các tác giả của nó. Bạn có thể áp dụng nó cho
+các chương trình của bạn cũng vậy.
+
+  Khi chúng ta nói đến phần mềm miễn phí, chúng ta đang đề cập đến tự do, không phải
+giá bán. Giấy phép Công cộng Chung của chúng tôi được thiết kế để đảm bảo rằng bạn
+có quyền tự do phân phối các bản sao của phần mềm miễn phí (và tính phí
+chúng nếu bạn muốn), rằng bạn nhận được mã nguồn hoặc có thể lấy nó nếu bạn
+muốn nó, rằng bạn có thể thay đổi phần mềm hoặc sử dụng các phần của nó trong
+chương trình miễn phí và bạn biết rằng bạn có thể làm những điều này.
+
+  Để bảo vệ quyền của bạn, chúng tôi cần ngăn người khác từ chối bạn
+các quyền này hoặc yêu cầu bạn từ bỏ các quyền. Do đó, bạn có
+một số trách nhiệm nếu bạn phân phối các bản sao của phần mềm hoặc nếu
+bạn sửa đổi nó: trách nhiệm tôn trọng tự do của người khác.
+
+  Ví dụ: nếu bạn phân phối các bản sao của một chương trình như vậy, liệu
+miễn phí hoặc tính phí, bạn phải chuyển cho người nhận như nhau
+quyền tự do mà bạn nhận được. Bạn phải đảm bảo rằng họ cũng nhận được
+hoặc có thể lấy mã nguồn. Và bạn phải cho họ thấy những điều khoản này để họ
+biết quyền của họ.
+
+  Các nhà phát triển sử dụng GNU GPL bảo vệ quyền của bạn bằng hai bước:
+(1) xác nhận bản quyền trên phần mềm và (2) cung cấp cho bạn Giấy phép này
+cấp cho bạn quyền hợp pháp để sao chép, phân phối và / hoặc sửa đổi nó.
+
+  Để bảo vệ nhà phát triển và tác giả, GPL giải thích rõ ràng
+rằng không có bảo hành cho phần mềm miễn phí này. Đối với cả người dùng 'và
+vì lợi ích của tác giả, GPL yêu cầu các phiên bản sửa đổi phải được đánh dấu là
+đã thay đổi, để các vấn đề của họ sẽ không bị quy nhầm là
+tác giả của các phiên bản trước.
+
+  Một số thiết bị được thiết kế để từ chối người dùng truy cập để cài đặt hoặc chạy
+các phiên bản sửa đổi của phần mềm bên trong chúng, mặc dù nhà sản xuất
+có thể làm như vậy. Điều này về cơ bản không phù hợp với mục đích
+bảo vệ quyền tự do thay đổi phần mềm của người dùng. Hệ thống
+mô hình lạm dụng như vậy xảy ra trong lĩnh vực sản phẩm dành cho cá nhân
+sử dụng, chính xác là nơi không thể chấp nhận được. Do đó, chúng tôi
+đã thiết kế phiên bản GPL này để cấm hành vi
+Mỹ phẩm. Nếu những vấn đề như vậy về cơ bản phát sinh trong các miền khác, chúng tôi
+sẵn sàng mở rộng quy định này cho các miền đó trong các phiên bản sau
+của GPL, nếu cần để bảo vệ quyền tự do của người dùng.
+
+  Cuối cùng, mọi chương trình luôn bị đe dọa bởi các bằng sáng chế phần mềm.
+Các quốc gia không nên cho phép các bằng sáng chế hạn chế việc phát triển và sử dụng
+phần mềm trên máy tính đa năng, nhưng trong những phần mềm đó, chúng tôi muốn
+tránh nguy cơ đặc biệt mà bằng sáng chế áp dụng cho một chương trình miễn phí có thể
+làm cho nó trở thành độc quyền hiệu quả. Để ngăn chặn điều này, GPL đảm bảo rằng
+Bằng sáng chế không thể được sử dụng để hiển thị chương trình không miễn phí.
+
+  Các điều khoản và điều kiện chính xác cho việc sao chép, phân phối và
+sửa đổi theo sau.
+
+                       CÁC ĐIỀU KHOẢN VÀ ĐIỀU KIỆN
+
+  0. Các định nghĩa.
+
+  "Giấy phép này" đề cập đến phiên bản 3 của Giấy phép Công cộng GNU.
+
+  "Bản quyền" cũng có nghĩa là các luật giống như bản quyền áp dụng cho các loại
+hoạt động, chẳng hạn như mặt nạ bán dẫn.
+
+  "Chương trình" đề cập đến bất kỳ tác phẩm có bản quyền nào được cấp phép theo điều này
+Giấy phép. Mỗi người được cấp phép được gọi là "bạn". "Người được cấp phép" và
+"người nhận" có thể là cá nhân hoặc tổ chức.
+
+  Để "sửa đổi" một tác phẩm có nghĩa là sao chép từ hoặc điều chỉnh toàn bộ hoặc một phần của tác phẩm
+theo cách yêu cầu sự cho phép bản quyền, khác với việc tạo ra một
+bản sao chính xác. Công việc kết quả được gọi là "phiên bản sửa đổi" của
+công việc trước đó hoặc một công việc "dựa trên" công việc trước đó.
+
+  "Tác phẩm được đề cập" có nghĩa là Chương trình chưa được sửa đổi hoặc dựa trên tác phẩm
+trên Chương trình.
+
+  Để "tuyên truyền" một tác phẩm có nghĩa là làm bất cứ điều gì với nó mà không
+sự cho phép, sẽ khiến bạn phải chịu trách nhiệm trực tiếp hoặc thứ hai đối với
+vi phạm theo luật bản quyền hiện hành, ngoại trừ việc thực thi nó trên
+máy tính hoặc sửa đổi một bản sao riêng tư. Truyền bá bao gồm sao chép,
+phân phối (có hoặc không có sửa đổi), cung cấp cho
+công cộng, và ở một số quốc gia cũng có các hoạt động khác.
+
+  Để "chuyển tải" một tác phẩm có nghĩa là bất kỳ hình thức truyền bá nào cho phép người khác
+các bên để tạo hoặc nhận bản sao. Chỉ tương tác với người dùng thông qua
+một mạng máy tính, không chuyển bản sao, không truyền tải.
