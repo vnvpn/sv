@@ -346,7 +346,7 @@ show_soga_version() {
 show_usage() {
 echo "Cach su dung tap lenh quan ly soga:"
      echo "------------------------------------------"
-     echo "soga				- Hiển thi menu quan ly  (nhieu chuc nang hon)"
+     echo "soga				- Hien thi menu quan ly  (nhieu chuc nang hon)"
      echo "soga start			- Khoi dong soga"
      echo "soga stop			- Dung soga"
      echo "soga restart			- Khoi dong lai soga"
