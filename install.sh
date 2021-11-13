@@ -8,7 +8,7 @@ plain='\033[0m'
 cur_dir=$(pwd)
 
 # check root
-[[ $EUID -ne 0 ]] && echo -e "${red}Loi：${plain}Ban phai su dung tai khoan root de chay tap lenh nay!\n" && exit 1
+[[ $EUID -ne 0 ]] && echo -e "${red}Lỗi：${plain}Bạn phải sử dụng quyền root để chạy tập lệnh này!\n" && exit 1
 
 # check os
 if [[ -f /etc/redhat-release ]]; then
@@ -26,11 +26,11 @@ elif cat /proc/version | grep -Eqi "ubuntu"; then
 elif cat /proc/version | grep -Eqi "centos|red hat|redhat"; then
     release="centos"
 else
-    echo -e "${red}Khong phat hien duoc phien ban he thong, vui long lien he voi tac gia https://vnvpn.pw!!${plain}\n" && exit 1
+    echo -e "${red}Phiên bản hệ thống không được phát hiện, vui lòng liên hệ với tác giả https://vnvpn.pw!${plain}\n" && exit 1
 fi
 
 if [ "$(getconf WORD_BIT)" != '32' ] && [ "$(getconf LONG_BIT)" != '64' ] ; then
-    echo "Phan mem nay khong ho tro he thong 32-bit (x86), vui long su dung he thong 64-bit (x86_64), neu phat hien sai, vui long lirn he https://vnvpn.pw"
+    echo "Phần mềm này không hỗ trợ hệ thống 32-bit (x86), vui lòng sử dụng hệ thống 64-bit (x86_64), nếu phát hiện sai, vui lòng liên hệ với tác giả https://vnvpn.pw"
     exit 2
 fi
 
@@ -46,15 +46,15 @@ fi
 
 if [[ x"${release}" == x"centos" ]]; then
     if [[ ${os_version} -le 6 ]]; then
-        echo -e "${red}Vui long su dung he thong phien ban CentOS 7 tro len!${plain}\n" && exit 1
+        echo -e "${red}Vui lòng sử dụng hệ thống phiên bản CentOS 7 trở lên!${plain}\n" && exit 1
     fi
 elif [[ x"${release}" == x"ubuntu" ]]; then
     if [[ ${os_version} -lt 16 ]]; then
-        echo -e "${red}Vui long su dung he thong phien ban Ubuntu 16 tro len${plain}\n" && exit 1
+        echo -e "${red}Vui lòng sử dụng hệ thống phiên bản Ubuntu 16 trở lên${plain}\n" && exit 1
     fi
 elif [[ x"${release}" == x"debian" ]]; then
     if [[ ${os_version} -lt 8 ]]; then
-        echo -e "${red}Vui long su dung he thong phien ban Debian 8 tro len!${plain}\n" && exit 1
+        echo -e "${red}Vui lòng sử dụng hệ thống phiên bản Debian 8 trở lên!${plain}\n" && exit 1
     fi
 fi
 
@@ -93,22 +93,22 @@ install_soga() {
     if  [ $# == 0 ] ;then
         last_version=$(curl -Ls "https://api.github.com/repos/RManLuo/crack-soga-v2ray/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
         if [[ ! -n "$last_version" ]]; then
-            echo -e "${red}Khong phat hien duoc phien ban soga, phien ban nay co the vuot qua gioi han API Github, vui long thu lai sau hoac chi dinh phien ban soga de cai dat theo cach thu cong${plain}"
+            echo -e "${red}Không phát hiện được phiên bản soga, phiên bản này có thể vượt quá giới hạn API Github, vui lòng thử lại sau hoặc chỉ định phiên bản soga để cài đặt theo cách thủ công${plain}"
             exit 1
         fi
-        echo -e "Phien ban moi nhat cua soga duoc phat hien:${last_version}，开始安装"
+        echo -e "Phiên bản mới nhất của soga được phát hiện:${last_version}，bắt đầu cài đặt"
         wget -N --no-check-certificate -O /usr/local/soga.tar.gz https://github.com/john8911/crack-soga-v2ray/releases/download/${last_version}/soga-cracked-linux64.tar.gz
         if [[ $? -ne 0 ]]; then
-            echo -e "${red}Tai xuong soga khong thanh cong, vui long dam bao may chu cua ban co the tai xuong tep Github${plain}"
+            echo -e "${red}Tải xuống soga không thành công, vui lòng đảm bảo máy chủ của bạn có thể tải xuống tệp Github${plain}"
             exit 1
         fi
     else
         last_version=$1
         url="https://github.com/john8911/crack-soga-v2ray/releases/download/${last_version}/soga-cracked-linux64.tar.gz"
-        echo -e "Bat dau cai dat soga v$1"
+        echo -e "Bắt đầu cài đặt soga v$1"
         wget -N --no-check-certificate -O /usr/local/soga.tar.gz ${url}
         if [[ $? -ne 0 ]]; then
-            echo -e "${red}Tai xuong soga v$1 khong thanh cong, hay dam bao rang phien ban nay ton tai${plain}"
+            echo -e "${red}Tải xuống soga v$1 không thành công, hãy đảm bảo rằng phiên bản này tồn tại${plain}"
             exit 1
         fi
     fi
@@ -123,20 +123,20 @@ install_soga() {
     systemctl daemon-reload
     systemctl stop soga
     systemctl enable soga
-    echo -e "${green}soga v${last_version}${plain} Qua trinh cai dat hoan tat va qua trinh khoi dong da duoc thiet lap de bat dau tu dong"
+    echo -e "${green}soga v${last_version}${plain} Quá trình cài đặt và quá trình khởi dộng đã được thiết lập để bắt đầu tự động"
     if [[ ! -f /etc/soga/soga.conf ]]; then
         cp soga.conf /etc/soga/
         echo -e ""
-        echo -e "De câi dat moi, vui long tham khao huong dẫn wiki truoc: https://github.com/vnvpn/sv/wiki, cau hinh noi dung can thiet"
+        echo -e "Để cài đặt mới, vui lòng tham khảo hướng dẫn wiki trước: https://github.com/vnvpn/sv/wiki, nội dung cấu hình cần thiết"
     else
         systemctl start soga
         sleep 2
         check_status
         echo -e ""
         if [[ $? == 0 ]]; then
-            echo -e "${green}Soga khoi dong lai thanh cong${plain}"
+            echo -e "${green}Soga khởi động lại thành công${plain}"
         else
-            echo -e "${red}Soga co the khong khoi dong duoc. Vui long su dung nhat ky soga de kiem tra thong tin nhat ky sau. Neu khong khoi dong duoc, dinh dang cau hinh co the da bi thay doi. Vui long truy cap wiki de kiem tra：https://github.com/vnvpn/sv/wiki${plain}"
+            echo -e "${red}Soga có thể không khởi động được, vui lòng sử dụng nhật ký soga để kiểm tra thông tin nhật ký. Nếu không khởi động được, định dạng cấu hình có thể đã bị thay đổi. Vui lòng truy cập wifi để kiểm tra：https://github.com/vnvpn/sv/wiki${plain}"
         fi
     fi
 
@@ -149,25 +149,25 @@ install_soga() {
     curl -o /usr/bin/soga -Ls https://raw.githubusercontent.com/vnvpn/sv/master/soga.sh
     chmod +x /usr/bin/soga
     echo -e ""
-echo "Cach su dung tap lenh quan ly soga:"
+echo "Cách sử dụng tập lệnh quản lý soga:"
      echo "------------------------------------------"
-     echo "soga				- Hien thi menu quan ly  (nhieu chuc nang hon)"
-     echo "soga start			- Khoi dong soga"
-     echo "soga stop			- Dung soga"
-     echo "soga restart			- Khoi dong lai soga"
-     echo "soga status			- Kiem tra tinh trang soga"
-     echo "soga enable			- Cai soga tu dong bat dau sau khi khoi dong"
-     echo "soga disable			- Huy bo khoi dong soga tu dau"
-     echo "soga log			- Kiem tra nhat ky soga"
-     echo "soga update			- Cap nhat phien ban moi soga"
-     echo "soga update x.x.x		- Cap nhat phien ban duoc chi dinh cua soga"
-     echo "soga install			- Cai dat ban cap nhat soga"
-     echo "soga uninstall		        - Go cai dat ban cap nhat soga"
-     echo "soga version			- Kiem tra phien ban soga"
+     echo "soga				- Hiển thị menu quản lý  (nhiều chức năng hơn)"
+     echo "soga start			- Khởi động soga"
+     echo "soga stop			- Dừng soga"
+     echo "soga restart			- Khởi động lại soga"
+     echo "soga status			- Kiểm tra tình trạng soga"
+     echo "soga enable			- Cài soga tự động bắt đầu khi khởi động"
+     echo "soga disable			- Hủy soga tự động bắt đầu khi khởi động"
+     echo "soga log			- Xem nhật ký soga"
+     echo "soga update			- Cập nhật phiên bản mới soga"
+     echo "soga update x.x.x		- Cập nhật phiên bản chỉ định của soga"
+     echo "soga install			- Cài đặt bản cập nhật soga"
+     echo "soga uninstall		        - Gỡ cài đặt bản cập nhật soga"
+     echo "soga version			- Kiểm tra phiên bản soga"
      echo "------------------------------------------"
 }
 
-echo -e "${green}Bat dau cai dat${plain}"
+echo -e "${green}Bắt đầu cài đặt${plain}"
 install_base
 install_acme
 install_soga $1
