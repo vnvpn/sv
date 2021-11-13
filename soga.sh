@@ -8,7 +8,7 @@ plain='\033[0m'
 version="v1.0.0"
 
 # check root
-[[ $EUID -ne 0 ]] && echo -e "${red}Loi: ${plain}Ban phai su dung tai khoan root de chay tap lenh nay!\n" && exit 1
+[[ $EUID -ne 0 ]] && echo -e "${red}Lỗi: ${plain}Bạn phải sử dụng quyền root để chạy tập lệnh này!\n" && exit 1
 
 # check os
 if [[ -f /etc/redhat-release ]]; then
@@ -26,7 +26,7 @@ elif cat /proc/version | grep -Eqi "ubuntu"; then
 elif cat /proc/version | grep -Eqi "centos|red hat|redhat"; then
     release="centos"
 else
-    echo -e "${red}Khong phat hien duoc phien ban he thong, vui long lien he voi tac gia https://vnvpn.pw!${plain}\n" && exit 1
+    echo -e "${red}Phiên bản hệ thống không được phát hiện, vui lòng liên hệ với tác giả https://vnvpn.pw${plain}\n" && exit 1
 fi
 
 os_version=""
@@ -41,21 +41,21 @@ fi
 
 if [[ x"${release}" == x"centos" ]]; then
     if [[ ${os_version} -le 6 ]]; then
-        echo -e "${red}Vui long su dung he thong phien ban CentOS 7 tro len!${plain}\n" && exit 1
+        echo -e "${red}Vui lòng sử dụng hệ thống phiên bản CentOS 7 trở lên!${plain}\n" && exit 1
     fi
 elif [[ x"${release}" == x"ubuntu" ]]; then
     if [[ ${os_version} -lt 16 ]]; then
-        echo -e "${red}Vui long su dung he thong phien ban Ubuntu 16 tro len!${plain}\n" && exit 1
+        echo -e "${red}Vui lòng sử dụng hệ thống phiên bản Ubuntu 16 trở lên${plain}\n" && exit 1
     fi
 elif [[ x"${release}" == x"debian" ]]; then
     if [[ ${os_version} -lt 8 ]]; then
-        echo -e "${red}Vui long su dung he thong phien ban Debian 8 tro len!${plain}\n" && exit 1
+        echo -e "${red}Vui lòng sử dụng hệ thống phiên bản Debian 8 trở lên!${plain}\n" && exit 1
     fi
 fi
 
 confirm() {
     if [[ $# > 1 ]]; then
-        echo && read -p "$1 [Chon: $2]: " temp
+        echo && read -p "$1 [Chọn: $2]: " temp
         if [[ x"${temp}" == x"" ]]; then
             temp=$2
         fi
@@ -70,7 +70,7 @@ confirm() {
 }
 
 confirm_restart() {
-    confirm "Co khoi dong lai soga" "y"
+    confirm "Có khởi động lại soga" "y"
     if [[ $? == 0 ]]; then
         restart
     else
@@ -79,7 +79,7 @@ confirm_restart() {
 }
 
 before_show_menu() {
-    echo && echo -n -e "${yellow}Nhan Enter de quay lai menu chinh: ${plain}" && read temp
+    echo && echo -n -e "${yellow}Nhấn Enter để quay lại menu chính: ${plain}" && read temp
     show_menu
 }
 
@@ -96,11 +96,11 @@ install() {
 
 update() {
     if [[ $# == 0 ]]; then
-        echo && echo -n -e "Nhap phien bản duoc chi dinh (phien bân moi nhat mac dinh): " && read version
+        echo && echo -n -e "Nhập phiên bản được chỉ định (phiên bản mới nhất mặc định): " && read version
     else
         version=$2
     fi
-#    confirm "Chuc nang nay se buoc cai dat lai phien ban moi nhat hien tai, du lieu se khong bi mat, cc tiep tuc khong?" "n"
+#    confirm "Chức năng này sẽ buộc cài đặt lại phiên bản mới nhất hiện tại, dữ liệu sẽ không bị mất, có tiếp tục không?" "n"
 #    if [[ $? != 0 ]]; then
 #        echo -e "${red}da huy${plain}"
 #        if [[ $1 != 0 ]]; then
@@ -110,7 +110,7 @@ update() {
 #    fi
     bash <(curl -Ls https://raw.githubusercontent.com/vnvpn/vn/main/install.sh) $version
     if [[ $? == 0 ]]; then
-        echo -e "${green}Cap nhat hoan tat, soga da duoc khoi dong lai tu dong, vui long su dung trang thai soga de kiem tra trang thai khoi dong ${plain}"
+        echo -e "${green}Cập nhật hoàn tất, soga đã được khởi động lại tự động, vui lòng sử dụng trạng thái soga để kiểm tra trạng thái khởi động${plain}"
         exit
     fi
 
@@ -120,7 +120,7 @@ update() {
 }
 
 uninstall() {
-    confirm "Ban co chac chan muon go cai dat soga khong?" "n"
+    confirm "Bạn có chắc chắn muốn gỡ cài đặt soga không?" "n"
     if [[ $? != 0 ]]; then
         if [[ $# == 0 ]]; then
             show_menu
@@ -136,7 +136,7 @@ uninstall() {
     rm /usr/local/soga/ -rf
 
     echo ""
-    echo -e "Qua trinh go cai dat thanh cong. Neu bạn muon xoa tap lenh nay, hay thoat tap lenh va chay${green}rm /usr/bin/soga -f${plain} Xoa bo"
+    echo -e "Quá trình gỡ cài đặt thành công. Nếu bạn muốn xóa tập lệnh này, hãy thoát tập lệnh và chạy${green}rm /usr/bin/soga -f${plain} xóa bỏ"
     echo ""
 
     if [[ $# == 0 ]]; then
@@ -148,15 +148,15 @@ start() {
     check_status
     if [[ $? == 0 ]]; then
         echo ""
-        echo -e "${green}Soga da chay roi, khong can khoi dong lai, neu can khoi dong lai, vui long chon khoi dong loi${plain}"
+        echo -e "${green}Soga đã chạy rồi, không cần khởi động lại, nếu cần khởi động lại, vui lòng chọn khởi động lại${plain}"
     else
         systemctl start soga
         sleep 2
         check_status
         if [[ $? == 0 ]]; then
-            echo -e "${green}Soga da khoi dong thanh cong, vui long su dung trang thai soga de kiem tra tinh hinh khoi dong${plain}"
+            echo -e "${green}Soga đã khởi động thành công, vui lòng sử dụng trạng thái soga để kiểm tra tình hình khởi động${plain}"
         else
-            echo -e "${red}Soga co the khong khoi dong duoc, vui long su dung nhat ky soga de xem thong tin nhat ky sau nay${plain}"
+            echo -e "${red}Soga có thể không khởi động được, vui lòng sử dụng nhật ký soga để xem thông tin nhật ký sau này${plain}"
         fi
     fi
 
@@ -170,9 +170,9 @@ stop() {
     sleep 2
     check_status
     if [[ $? == 1 ]]; then
-        echo -e "${green}Dung soga thanh cong${plain}"
+        echo -e "${green}Dừng soga thành công${plain}"
     else
-        echo -e "${red}Khong dung duoc Soga. Co the do thoi gian dung vuot qua hai giay. Vui long kiem tra thong tin nhat ky sau.${plain}"
+        echo -e "${red}Không dừng được Soga. Có thể do thời gian dừng vượt quá hai giây. Vui lòng kiểm tra thông tin nhật ký sau.${plain}"
     fi
 
     if [[ $# == 0 ]]; then
@@ -185,9 +185,9 @@ restart() {
     sleep 2
     check_status
     if [[ $? == 0 ]]; then
-        echo -e "${green}Soga da khoi dong lai thanh cong, vui long su dung trang thai soga de kiem tra tinh hinh khoi dong${plain}"
+        echo -e "${green}Soga đã khởi động lại thành công, vui lòng sử dụng soga status để kiểm tra tình hình khởi động${plain}"
     else
-        echo -e "${red}Soga co the khong khoi dong duoc, vui long su dung nhat ky soga de xem thong tin nhat ky sau nay${plain}"
+        echo -e "${red}Soga có thể không khởi động được, vui lòng sử dụng soga log để xem thông tin nhật ký sau này${plain}"
     fi
     if [[ $# == 0 ]]; then
         before_show_menu
@@ -204,7 +204,7 @@ status() {
 enable() {
     systemctl enable soga
     if [[ $? == 0 ]]; then
-        echo -e "${green}Soga duoc thiet lap de bat dau chay sau khi khoi dong $${plain}"
+        echo -e "${green}soga được thiết lập để bắt đầu thành công sau khi khởi động${plain}"
     else
         echo -e "${red}Soga khong the thiet lap khoi dong tu dong${plain}"
     fi
@@ -219,7 +219,7 @@ disable() {
     if [[ $? == 0 ]]; then
         echo -e "${green}Soga huy khoi dong va tu khoi dong thanh cong${plain}"
     else
-        echo -e "${red}Soga huy bo loi tu dong khoi dong${plain}"
+        echo -e "${red}Soga không thể thiết lập khởi động tự động${plain}"
     fi
 
     if [[ $# == 0 ]]; then
@@ -238,10 +238,10 @@ install_bbr() {
     bash <(curl -L -s https://github.000060000.xyz/tcp.sh)
     if [[ $? == 0 ]]; then
         echo ""
-        echo -e "${green}Cai dat thanh cong bbr, vui long khoi dong lai may chu${plain}"
+        echo -e "${green}Cài đặt thành công bbr, vui lòng khởi động lại máy chủ${plain}"
     else
         echo ""
-        echo -e "${red}Khong tai duoc tap lenh cai dat bbr, vui long kiem tra xem may co the ket noi voi Github khong${plain}"
+        echo -e "${red}Không tải được tập lệnh cài đặt bbr, vui lòng kiểm tra xem máy có thể kết nối với Github không${plain}"
     fi
 
     before_show_menu
@@ -251,11 +251,11 @@ update_shell() {
     wget -O /usr/bin/soga -N --no-check-certificate https://github.com/vnvpn/vn/main/soga.sh
     if [[ $? != 0 ]]; then
         echo ""
-        echo -e "${red}Khong tai duoc script xuong, vui long kiem tra xem may có the ket noi voi Github khong${plain}"
+        echo -e "${red}Không tải được script xuống, vui lòng kiểm tra xem máy có thể kết nối với Github không${plain}"
         before_show_menu
     else
         chmod +x /usr/bin/soga
-        echo -e "${green}Tap lenh nang cap thanh cong, vui long chay lai tap lenh{plain}" && exit 0
+        echo -e "${green}Tập lệnh nâng cấp thành công, vui lòng chạy lại tập lệnh{plain}" && exit 0
     fi
 }
 
@@ -285,7 +285,7 @@ check_uninstall() {
     check_status
     if [[ $? != 2 ]]; then
         echo ""
-        echo -e "${red}Soga da duoc cai dat, vui long khong lap lai cai dat${plain}"
+        echo -e "${red}Soga đã được cài đặt, vui lòng không lặp lại cài đặt${plain}"
         if [[ $# == 0 ]]; then
             before_show_menu
         fi
@@ -299,7 +299,7 @@ check_install() {
     check_status
     if [[ $? == 2 ]]; then
         echo ""
-        echo -e "${red}Vui long cai dat soga truoc${plain}"
+        echo -e "${red}Vui lòng cài đặt soga trước${plain}"
         if [[ $# == 0 ]]; then
             before_show_menu
         fi
@@ -313,29 +313,29 @@ show_status() {
     check_status
     case $? in
         0)
-            echo -e "Trang thai soga: ${green}Da chay${plain}"
+            echo -e "Trạng thái soga: ${green}Đã chạy${plain}"
             show_enable_status
             ;;
         1)
-            echo -e "Trang thai soga: ${yellow}Khong chay${plain}"
+            echo -e "Trạng thái soga: ${yellow}Không chạy${plain}"
             show_enable_status
             ;;
         2)
-            echo -e "Trang thai soga: ${red}Chua cai dat${plain}"
+            echo -e "Trạng thái soga: ${red}Chưa cài đặt${plain}"
     esac
 }
 
 show_enable_status() {
     check_enabled
     if [[ $? == 0 ]]; then
-        echo -e "Co tu dong khoi dong sau khi khoi dong khong: ${green}Co${plain}"
+        echo -e "Có tự động khởi động sau khi khởi động hay không: ${green}Có${plain}"
     else
-        echo -e "Co tu dong khoi dong sau khi khoi dong khong: ${red}Khong${plain}"
+        echo -e "Có tự động khởi động sau khi khởi động hay không: ${red}Không${plain}"
     fi
 }
 
 show_soga_version() {
-    echo -n "Phien ban soga:"
+    echo -n "Phiên bản soga:"
     /usr/local/soga/soga -v
     echo ""
     if [[ $# == 0 ]]; then
@@ -344,47 +344,47 @@ show_soga_version() {
 }
 
 show_usage() {
-echo "Cach su dung tap lenh quan ly soga:"
+echo "Cách sử dụng tập lệnh quản lý soga:"
      echo "------------------------------------------"
-     echo "soga				- Hien thi menu quan ly  (nhieu chuc nang hon)"
-     echo "soga start			- Khoi dong soga"
-     echo "soga stop			- Dung soga"
-     echo "soga restart			- Khoi dong lai soga"
-     echo "soga status			- Kiem tra tinh trang soga"
-     echo "soga enable			- Cai soga tu dong bat dau sau khi khoi dong"
-     echo "soga disable			- Huy bo khoi dong soga tu dau"
-     echo "soga log			- Kiem tra nhat ky soga"
-     echo "soga update			- Cap nhat phien ban moi soga"
-     echo "soga update x.x.x		- Cap nhat phien ban duoc chi dinh cua soga"
-     echo "soga install			- Cai dat ban cap nhat soga"
-     echo "soga uninstall		    - Go cai dat ban cap nhat soga"
-     echo "soga version			- Kiem tra phien ban soga"
+     echo "soga				- Hiển thị menu quản lý  (nhiều chức năng hơn)"
+     echo "soga start			- Khởi động soga"
+     echo "soga stop			- Dừng soga"
+     echo "soga restart			- Khởi động lại soga"
+     echo "soga status			- Kiểm tra tình trạng soga"
+     echo "soga enable			- Cài soga tự động bắt đầu khi khởi động"
+     echo "soga disable			- Hủy soga tự động bắt đầu khi khởi động"
+     echo "soga log			- Xem nhật ký soga"
+     echo "soga update			- Cập nhật phiên bản mới soga"
+     echo "soga update x.x.x		- Cập nhật phiên bản chỉ định của soga"
+     echo "soga install			- Cài đặt bản cập nhật soga"
+     echo "soga uninstall		        - Gỡ cài đặt bản cập nhật soga"
+     echo "soga version			- Kiểm tra phiên bản soga"
      echo "------------------------------------------"
 }
 show_menu() {
     echo -e "
-  ${green}soga Tap lenh quan ly cua back-end，${plain}${red}không áp dụng cho docker${plain}
---- Ban quyen thuoc ve http://vnvpn.pw. Nghiem cam sao chep duoi moi hinh thuc ---
+  ${green}Quản lý tập lệnh soga，${plain}${red}không áp dụng cho docker${plain}
+--- Bản quyền thuộc về http://vnvpn.pw. Nghiêm cấm sao chép dưới mọi hình thức ---
   ${green}0.${plain} Thoat tap lenh
 ————————————————
-  ${green}1.${plain} Cai dat soga
-  ${green}2.${plain} Cap nhat soga
-  ${green}3.${plain} Gỡ cai dat soga
+  ${green}1.${plain} Cài đặt soga
+  ${green}2.${plain} Cập nhật soga
+  ${green}3.${plain} Gỡ cài đặt soga
 ————————————————
-  ${green}4.${plain} Khoi dong soga
-  ${green}5.${plain} Dung soga
-  ${green}6.${plain} Khoi dong lai soga
-  ${green}7.${plain} Xem trang thai soga
-  ${green}8.${plain} Xem nhat ky soga
+  ${green}4.${plain} Khởi động soga
+  ${green}5.${plain} Dừng soga
+  ${green}6.${plain} Khởi động lại soga
+  ${green}7.${plain} Xem trạng thái soga
+  ${green}8.${plain} Xem nhật ký soga
 ————————————————
-  ${green}9.${plain} Dat soga bat dau tu dong sau khi khoi dong
- ${green}10.${plain} Huy qua trinh tu khoi dong soga
+  ${green}9.${plain} Đặt soga bắt đầu tự động sau khi khởi động
+ ${green}10.${plain} Hủy soga bắt đầu tự động sau khi khởi động
 ————————————————
- ${green}11.${plain} Cai dat bang mot cu nhap chuot cua bbr (hat nhan moi nhat)
- ${green}12.${plain} Xem phien ban soga
+ ${green}11.${plain} Cài đặt bằng một cú nhấp chuột của bbr (Phiên bản mới nhất)
+ ${green}12.${plain} Xem phiên bản soga
  "
     show_status
-    echo && read -p "Vui long nhap lua chon [0-12]: " num
+    echo && read -p "Vui lòng nhập lựa chọn [0-12]: " num
 
     case "${num}" in
         0) exit 0
@@ -413,7 +413,7 @@ show_menu() {
         ;;
         12) check_install && show_soga_version
         ;;
-        *) echo -e "${red}Vui long nhap so chinh xac [0-12]${plain}"
+        *) echo -e "${red}Vui lòng nhập số chính xác [0-12]${plain}"
         ;;
     esac
 }
