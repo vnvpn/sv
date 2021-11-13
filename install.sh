@@ -162,7 +162,7 @@ echo "Cach su dung tap lenh quan ly soga:"
      echo "soga update			- Cap nhat phien ban moi soga"
      echo "soga update x.x.x		- Cap nhat phien ban duoc chi dinh cua soga"
      echo "soga install			- Cai dat ban cap nhat soga"
-     echo "soga uninstall		    - Go cai dat ban cap nhat soga"
+     echo "soga uninstall		        - Go cai dat ban cap nhat soga"
      echo "soga version			- Kiem tra phien ban soga"
      echo "------------------------------------------"
 }
