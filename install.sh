@@ -123,7 +123,7 @@ install_soga() {
     systemctl daemon-reload
     systemctl stop soga
     systemctl enable soga
-    echo -e "${green}soga v${last_version}${plain} Quá trình cài đặt và quá trình khởi dộng đã được thiết lập để bắt đầu tự động"
+    echo -e "${green}soga v${last_version}${plain} Quá trình cài đặt và quá trình khởi động đã được thiết lập để bắt đầu tự động"
     if [[ ! -f /etc/soga/soga.conf ]]; then
         cp soga.conf /etc/soga/
         echo -e ""
