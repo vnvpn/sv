@@ -148,7 +148,7 @@ start() {
     check_status
     if [[ $? == 0 ]]; then
         echo ""
-        echo -e "${green}Soga da chây roi, khong can khoi dong lai, neu can khoi dong lai, vui long chon khoi dong loi${plain}"
+        echo -e "${green}Soga da chay roi, khong can khoi dong lai, neu can khoi dong lai, vui long chon khoi dong loi${plain}"
     else
         systemctl start soga
         sleep 2
@@ -285,7 +285,7 @@ check_uninstall() {
     check_status
     if [[ $? != 2 ]]; then
         echo ""
-        echo -e "${red}Soga da duoc cai dat, vui long khong lap lai cai dat{plain}"
+        echo -e "${red}Soga da duoc cai dat, vui long khong lap lai cai dat${plain}"
         if [[ $# == 0 ]]; then
             before_show_menu
         fi
@@ -346,7 +346,7 @@ show_soga_version() {
 show_usage() {
 echo "Cach su dung tap lenh quan ly soga:"
      echo "------------------------------------------"
-     echo "soga				- Hien thi menu quan ly  (nhieu chuc nang hon)"
+     echo "soga				- Hiển thi menu quan ly  (nhieu chuc nang hon)"
      echo "soga start			- Khoi dong soga"
      echo "soga stop			- Dung soga"
      echo "soga restart			- Khoi dong lai soga"
