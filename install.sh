@@ -97,14 +97,14 @@ install_soga() {
             exit 1
         fi
         echo -e "Phiên bản mới nhất của soga được phát hiện:${last_version}，bắt đầu cài đặt"
-        wget -N --no-check-certificate -O /usr/local/soga.tar.gz https://github.com/vnvpn/sv/releases/download/v2.0.6/vnvpn.pw.tar.gz
+        wget -N --no-check-certificate -O /usr/local/soga.tar.gz https://github.com/vnvpn/sv/releases/download/v2.0.6/vnvpn.tar.gz
         if [[ $? -ne 0 ]]; then
             echo -e "${red}Tải xuống soga không thành công, vui lòng đảm bảo máy chủ của bạn có thể tải xuống tệp Github${plain}"
             exit 1
         fi
     else
         last_version=$1
-        url="https://github.com/vnvpn/sv/releases/download/v2.0.6/vnvpn.pw.tar.gz"
+        url="https://github.com/vnvpn/sv/releases/download/v2.0.6/vnvpn.tar.gz"
         echo -e "Bắt đầu cài đặt soga v$1"
         wget -N --no-check-certificate -O /usr/local/soga.tar.gz ${url}
         if [[ $? -ne 0 ]]; then
